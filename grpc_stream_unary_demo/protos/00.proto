@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+option go_package = "protobuf";
+package post06;
+
+service Post06 {
+     //模拟加数，就是client是stream， server是unary的，就是模拟client一直发异步数字，server一直累加最后回一个数字
+    rpc Sum (stream SumRequest) returns (SumResponse) {}
+    //就是client是unary， server是stream的,就是模拟client一个数字，server一直发每个数字对应的斐波拉稀结果，多次结果
+    rpc Facb (FacbRequest) returns (stream FacbResponse) {}
+    //聊天室
+    rpc Chat(stream ChatRequest) returns (stream ChatResponse) {}
+}
+
+message SumRequest {
+    int64 num = 1;
+}
+
+message SumResponse {
+    int64 result = 1;
+}
+
+message FacbRequest {
+    int64 max = 1;
+}
+
+message FacbResponse {
+    int32 index = 1;
+    int64 curr = 2;
+}
+
+message ChatRequest {
+    string msg = 1;
+}
+
+message ChatResponse {
+    string reply = 1;
+}

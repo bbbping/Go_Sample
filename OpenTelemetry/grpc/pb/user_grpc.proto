@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package user;
+// 指定生成的go文件里面的包名称叫user
+option go_package = ".;user";
+
+
+// User service for tracing demo.
+service User {
+      rpc Insert(InsertReq) returns (InsertRes) {}
+        rpc Query(QueryReq) returns (QueryRes) {}
+          rpc Delete(DeleteReq) returns (DeleteRes) {}
+}
+
+message InsertReq {
+      string Name = 1;
+}
+
+message InsertRes {
+      int32 Id = 1;
+}
+
+message QueryReq {
+      int32 Id = 1;
+}
+
+message QueryRes {
+      int32  Id = 1;
+        string Name = 2;
+}
+
+message DeleteReq {
+      int32 Id = 1;
+}
+
+message DeleteRes {}
